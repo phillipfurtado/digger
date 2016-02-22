@@ -2,13 +2,9 @@
 
 Para compilar
 
- mvn install
+`mvn install`
 
-Para executar
+Para executar o digger-api server
 
- java -jar target/digger.jar
-
-ou
-
- mvn exec:exec
+`java -jar digger-api/target/digger.jar`
 
