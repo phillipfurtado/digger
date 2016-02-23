@@ -3,6 +3,9 @@ package com.github.phillipfurtado.digger.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ServidorDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,6 +23,10 @@ public class ServidorDTO implements Serializable {
 
     private List<String> aplicacoes;
 
+    public ServidorDTO() {
+        super();
+    }
+    
     public ServidorDTO(String nome, String enderecoIP) {
         super();
         this.nome = nome;

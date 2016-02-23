@@ -3,19 +3,23 @@ package com.github.phillipfurtado.digger;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
 import javax.ws.rs.core.Application;
 
-import com.github.phillipfurtado.digger.dto.ServidorDTO;
-import com.github.phillipfurtado.digger.rest.ServidorResource;
+import com.github.phillipfurtado.digger.handle.ExceptionHandler;
 
 public class DiggerApplication extends Application {
 
+    @Inject
+    private Instance<Resource> resources;
+
     @Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new LinkedHashSet<>();
-        resources.add(ServidorResource.class);
-        resources.add(ServidorDTO.class);
-        return resources;
+        final Set<Class<?>> resourceList = new LinkedHashSet<>();
+        resources.forEach(resource -> resourceList.add(resource.getClass()));
+        resourceList.add(ExceptionHandler.class);
+        return resourceList;
     }
 
 }

@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import com.github.phillipfurtado.digger.exception.DiggerException;
+
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.common.IOUtils;
 import net.schmizz.sshj.connection.channel.direct.Session;
@@ -34,7 +36,7 @@ public class ApplicationScanner {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Nao foi possivel conectar ao host destino", e);
+            throw new DiggerException("Nao foi possivel conectar ao host destino", e);
         }
 
         return new ArrayList<>();
