@@ -36,8 +36,11 @@ public class ServidorService {
     public ServidorDTO obterAplicacoesInstaladas(Long idServidor) {
         // TODO obter servidor do banco de dados
         ServidorDTO dto = new ServidorDTO("vagrant", "10.11.12.42");
+        dto.setTipoOS(1);
 
-        List<String> apps = appScanner.obterListaAplicacoesViaSHH(dto.getEnderecoIP(), "vagrant", "vagrant");
+        List<String> apps = appScanner.obterListaAplicacoesViaSHH(dto.getEnderecoIP(), dto.getTipoOS(), "vagrant",
+                "vagrant");
+
         dto.setAplicacoes(apps);
         return dto;
     }

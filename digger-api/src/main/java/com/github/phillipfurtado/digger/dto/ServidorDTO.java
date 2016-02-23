@@ -14,6 +14,9 @@ public class ServidorDTO implements Serializable {
     private String user;
 
     private String senha;
+    
+    //1 - Debian Based, 2 - RedHat Based
+    private Integer tipoOS; 
 
     private List<String> aplicacoes;
 
@@ -61,6 +64,14 @@ public class ServidorDTO implements Serializable {
 
     public void setAplicacoes(List<String> aplicacoes) {
         this.aplicacoes = aplicacoes;
+    }
+    
+    public Integer getTipoOS() {
+        return tipoOS;
+    }
+    
+    public void setTipoOS(Integer tipoOS) {
+        this.tipoOS = tipoOS;
     }
 
 }
