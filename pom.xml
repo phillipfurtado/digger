@@ -74,6 +74,7 @@
 
  <modules>
   <module>digger-api</module>
+  <module>digger-web</module>
  </modules>
 
 </project>

@@ -2,7 +2,7 @@
 echo Instalacao Digger
   
 echo Instalando bibliotecas
-sudo apt-get install -y --force-yes openjdk-8-jdk curl wget 
+sudo apt-get install -y --force-yes openjdk-8-jdk curl wget nodejs 
 
 echo Instalando Docker
 sudo curl -fsSL https://get.docker.com/gpg | sudo apt-key add -

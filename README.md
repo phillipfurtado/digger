@@ -6,8 +6,10 @@ Para compilar
 
 Para executar o digger-api server 
 
-`./start.sh`
+`./start-api.sh`
 
+Para executar o digger-web server
+`./start-web.sh`
 
 # API
 
