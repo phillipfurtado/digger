@@ -19,6 +19,7 @@ public class EmbeddedServer {
     private String deploymentName = "app-name";
     private String appPath = "/api";
     private Class<? extends Application> resourcesClass;
+    
 
     public EmbeddedServer(final String host, final Integer port) {
         Undertow.Builder serverBuilder = Undertow.builder().addHttpListener(port, host);

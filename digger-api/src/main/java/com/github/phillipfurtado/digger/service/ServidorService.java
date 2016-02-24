@@ -1,47 +1,81 @@
 package com.github.phillipfurtado.digger.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import com.github.phillipfurtado.digger.dto.ServidorDTO;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
+
+import com.github.phillipfurtado.digger.exception.DiggerException;
+import com.github.phillipfurtado.digger.model.Servidor;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 @ApplicationScoped
 public class ServidorService {
 
+    private static final String ID = "_id ==";
+
+    private static Datastore datastore;
+
+    static {
+        MongoClientURI uri = new MongoClientURI("mongodb://172.17.0.2:27017/digger");
+        final MongoClient mongoClient = new MongoClient(uri);
+
+        final Morphia morphia = new Morphia();
+        morphia.mapPackage("com.github.phillip.furtado.digger.model");
+
+        final Datastore ds = morphia.createDatastore(mongoClient, "digger");
+        ds.ensureIndexes();
+        datastore = ds;
+    }
+
     @Inject
     private ApplicationScanner appScanner;
 
-    public List<ServidorDTO> obterServidores() {
-        List<ServidorDTO> servidores = new ArrayList<>();
-        ServidorDTO s1 = new ServidorDTO("webserver", "192.168.0.1");
-        servidores.add(s1);
-        return servidores;
+    public List<Servidor> obterServidores() {
+        return datastore.find(Servidor.class).asList();
     }
 
-    public ServidorDTO criarServidor(ServidorDTO servidor) {
-        return null;
+    public Servidor criarServidor(Servidor servidor) {
+        final Key<Servidor> servidorKey = datastore.save(servidor);
+        servidor.setId((String) servidorKey.getId());
+        return servidor;
     }
 
-    public ServidorDTO alterarServidor(Long idServidor, ServidorDTO servidor) {
-        return null;
+    public Servidor alterarServidor(String idServidor, Servidor servidor) {
+        final UpdateOperations<Servidor> updateOperations = datastore.createUpdateOperations(Servidor.class)
+                .set("nome", servidor.getNome()).set("enderecoIP", servidor.getEnderecoIP())
+                .set("user", servidor.getUser()).set("senha", servidor.getSenha()).set("tipoOS", servidor.getTipoOS());
+        final Query<Servidor> query = datastore.createQuery(Servidor.class).filter(ID, new ObjectId(idServidor));
+        datastore.update(query, updateOperations);
+        return query.get();
     }
 
-    public void removerServidor(Long idServidor) {
-
+    public Servidor obterServidor(String idServidor) {
+        return datastore.createQuery(Servidor.class).filter(ID, new ObjectId(idServidor)).get();
     }
 
-    public ServidorDTO obterAplicacoesInstaladas(Long idServidor) {
-        // TODO obter servidor do banco de dados
-        ServidorDTO dto = new ServidorDTO("vagrant", "localhost");
-        dto.setTipoOS(1);
+    public void removerServidor(String idServidor) {
+        datastore.findAndDelete(datastore.createQuery(Servidor.class).filter(ID, new ObjectId(idServidor)));
+    }
 
-        List<String> apps = appScanner.obterListaAplicacoesViaSHH(dto.getEnderecoIP(), dto.getTipoOS(), "vagrant",
-                "vagrant");
+    public Servidor obterAplicacoesInstaladas(String idServidor) {
+        Servidor servidor = obterServidor(idServidor);
+        if(servidor == null) {
+            throw new DiggerException("Servidor nao encontrado");
+        }
 
-        dto.setAplicacoes(apps);
-        return dto;
+        List<String> apps = appScanner.obterListaAplicacoesViaSHH(servidor.getEnderecoIP(), servidor.getTipoOS(),
+                servidor.getUser(), servidor.getSenha());
+
+        servidor.setAplicacoes(apps);
+        return servidor;
     }
 }
