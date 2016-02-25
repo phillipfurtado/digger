@@ -1,5 +1,9 @@
 # digger
 
+Antes de executar o setup tenha certeza que tem o Docker instalado
+
+`https://docs.docker.com/engine/installation/` 
+
 Para compilar
 
 `./setup.sh`
@@ -9,7 +13,12 @@ Para executar o digger-api server
 `./start-api.sh`
 
 Para executar o digger-web server
+
 `./start-web.sh`
+
+# WEB
+
+Via Browser `http://localhost:9000`
 
 # API
 

@@ -2,10 +2,7 @@
 echo Instalacao Digger
   
 echo Instalando bibliotecas
-sudo apt-get install -y --force-yes openjdk-8-jdk curl wget nodejs 
-
-echo Instalando Docker
-sudo curl -fsSL https://get.docker.com/gpg | sudo apt-key add -
+sudo apt-get install -y --force-yes openjdk-8-jdk curl wget nodejs
 
 sudo wget -nc --directory-prefix=/tmp http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip
 sudo unzip -o /tmp/apache-maven-3.3.9-bin.zip -d /tmp

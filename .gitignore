@@ -17,3 +17,6 @@ hs_err_pid*
 .project
 .settings
 dependency-reduced-pom.xml
+
+#node stuff
+digger-web/node_modules

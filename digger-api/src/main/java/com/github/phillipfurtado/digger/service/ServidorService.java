@@ -25,7 +25,7 @@ public class ServidorService {
     private static Datastore datastore;
 
     static {
-        MongoClientURI uri = new MongoClientURI("mongodb://172.17.0.2:27017/digger");
+        MongoClientURI uri = new MongoClientURI("mongodb://172.17.0.1:27017/digger");
         final MongoClient mongoClient = new MongoClient(uri);
 
         final Morphia morphia = new Morphia();
