@@ -67,3 +67,30 @@ Via Browser `http://localhost:9000`
 - Listar Aplicacoes de Servidor
 
   GET /servidores/{id}/aplicacoes
+```json
+  [
+    {
+    "nome": "account-plugin-google"
+  },
+  {
+    "nome": "account-plugin-jabber"
+  },
+  {
+    "nome": "account-plugin-salut"
+  },
+  {
+    "nome": "account-plugin-yahoo"
+  },
+  {
+    "nome": "accountsservice"
+  },
+  {
+    "nome": "acl"
+  },
+  {
+    "nome": "acpi-support"
+  },
+  {
+    "nome": "acpid"
+  }]
+```

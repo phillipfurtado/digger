@@ -1,0 +1,33 @@
+<div>
+	<a class="btn btn-primary" ui-sref="editServidor({id:servidor.id})">Edit</a>
+</div>
+<table class="table servidortable">
+	<tr>
+		<td><h3>Detalhes de {{servidor.nome}}</h3></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Nome</td>
+		<td>{{servidor.nome}}</td>
+	</tr>
+	<tr>
+		<td>Endereco IP</td>
+		<td>{{servidor.enderecoIP}}</td>
+	</tr>
+	<tr>
+		<td>Tipo OS</td>
+		<td>{{servidor.tipoOS}}</td>
+	</tr>
+	<tr>
+		<td>Applicacoes instaladas</td>
+		<td><table class="table servidortable">
+				<tr ng-repeat="app in aplicacoes">
+					<td>{{app.nome}}</td>
+
+				</tr>
+			</table></td>
+	</tr>
+</table>
+<div>
+	<a class="btn btn-primary" ui-sref="editServidor({id:servidor.id})">Edit</a>
+</div>

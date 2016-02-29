@@ -7,6 +7,7 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.ws.rs.core.Application;
 
+import com.github.phillipfurtado.digger.handle.CorsFilter;
 import com.github.phillipfurtado.digger.handle.ExceptionHandler;
 
 public class DiggerApplication extends Application {
@@ -19,6 +20,7 @@ public class DiggerApplication extends Application {
         final Set<Class<?>> resourceList = new LinkedHashSet<>();
         resources.forEach(resource -> resourceList.add(resource.getClass()));
         resourceList.add(ExceptionHandler.class);
+        resourceList.add(CorsFilter.class);
         return resourceList;
     }
 

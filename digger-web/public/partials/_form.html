@@ -1,0 +1,38 @@
+<div class="form-group">
+    <label for="title" class="col-sm-2 control-label">Nome</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="servidor.nome" class="form-control" id="nome" placeholder="Nome do Servidor"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="year" class="col-sm-2 control-label">Endereco IP</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="servidor.enderecoIP" class="form-control" id="enderecoIP" placeholder="Endereco IP"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="director" class="col-sm-2 control-label">Usuario SSH</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="servidor.user" class="form-control" id="user" placeholder="Usuario SSH do servidor"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="plot" class="col-sm-2 control-label">Senha</label>
+    <div class="col-sm-10">
+        <input type="password" ng-model="servidor.senha" class="form-control" id="senha" placeholder="Digite a senha"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="plot" class="col-sm-2 control-label">Tipo S.O. do Servidor</label>
+    <div class="col-sm-10">
+        <input type="text" ng-model="servidor.tipoOS" class="form-control" id="tipoOS" placeholder="Digite '1' para Debian Based ou '2' para RedHat Based"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" class="btn btn-primary" value="Save"/>
+    </div>
+</div>

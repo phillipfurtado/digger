@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.github.phillipfurtado.digger.Resource;
+import com.github.phillipfurtado.digger.model.Aplicacao;
 import com.github.phillipfurtado.digger.model.Servidor;
 import com.github.phillipfurtado.digger.service.ServidorService;
 
@@ -62,7 +63,7 @@ public class ServidorResource implements Resource {
 
     @GET
     @Path("/{id}/aplicacoes")
-    public Servidor obterAplicacoesServidor(@PathParam("id") String idServidor) {
+    public List<Aplicacao> obterAplicacoesServidor(@PathParam("id") String idServidor) {
 
         return servidorService.obterAplicacoesInstaladas(idServidor);
     }

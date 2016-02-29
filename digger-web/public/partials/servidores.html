@@ -1,0 +1,14 @@
+<a ui-sref="newServidor" class="btn-primary btn-lg nodecoration">Adicione novo Servidor</a>
+<table class="table servidortable">
+    <tr>
+        <td><h3>Todos Servidores</h3></td>
+        <td></td>
+    </tr>
+    <tr ng-repeat="servidor in servidores">
+        <td>{{servidor.nome}}</td>
+        <td>
+            <a class="btn btn-primary" ui-sref="viewServidor({id:servidor.id})">Visualizar</a>
+            <a class="btn btn-danger"  ng-click="deleteServidor(servidor)">Deletar</a>
+        </td>
+    </tr>
+</table>

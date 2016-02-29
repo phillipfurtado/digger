@@ -28,8 +28,6 @@ public class Servidor implements Serializable {
     // 1 - Debian Based, 2 - RedHat Based
     private Integer tipoOS;
 
-    private List<String> aplicacoes;
-
     public Servidor() {
         super();
     }
@@ -70,14 +68,6 @@ public class Servidor implements Serializable {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    public List<String> getAplicacoes() {
-        return aplicacoes;
-    }
-
-    public void setAplicacoes(List<String> aplicacoes) {
-        this.aplicacoes = aplicacoes;
     }
 
     public Integer getTipoOS() {

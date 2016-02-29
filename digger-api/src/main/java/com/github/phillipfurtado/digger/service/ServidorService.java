@@ -1,5 +1,6 @@
 package com.github.phillipfurtado.digger.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,6 +14,7 @@ import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 
 import com.github.phillipfurtado.digger.exception.DiggerException;
+import com.github.phillipfurtado.digger.model.Aplicacao;
 import com.github.phillipfurtado.digger.model.Servidor;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -25,7 +27,7 @@ public class ServidorService {
     private static Datastore datastore;
 
     static {
-        MongoClientURI uri = new MongoClientURI("mongodb://172.17.0.1:27017/digger");
+        MongoClientURI uri = new MongoClientURI("mongodb://172.17.0.2:27017/digger");
         final MongoClient mongoClient = new MongoClient(uri);
 
         final Morphia morphia = new Morphia();
@@ -66,16 +68,20 @@ public class ServidorService {
         datastore.findAndDelete(datastore.createQuery(Servidor.class).filter(ID, new ObjectId(idServidor)));
     }
 
-    public Servidor obterAplicacoesInstaladas(String idServidor) {
+    public List<Aplicacao> obterAplicacoesInstaladas(String idServidor) {
         Servidor servidor = obterServidor(idServidor);
-        if(servidor == null) {
+        if (servidor == null) {
             throw new DiggerException("Servidor nao encontrado");
         }
 
         List<String> apps = appScanner.obterListaAplicacoesViaSHH(servidor.getEnderecoIP(), servidor.getTipoOS(),
                 servidor.getUser(), servidor.getSenha());
 
-        servidor.setAplicacoes(apps);
-        return servidor;
+        List<Aplicacao> aplicacoes = new ArrayList<>();
+        for (String string : apps) {
+            aplicacoes.add(new Aplicacao(string));
+        }
+
+        return aplicacoes;
     }
 }
